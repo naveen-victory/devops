@@ -1,0 +1,15 @@
+pipeline {
+	agent {label 'prod-server'}
+	stages {
+		stage ("1.Download the image") {
+			steps {
+				sh "sudo docker pull $image"
+			}
+		}
+		stage ("2. Run the container") {
+			steps {
+				sh "sudo docker run -dit -p 8080:8080 --name $container $image"
+			}
+		}
+	}
+}
